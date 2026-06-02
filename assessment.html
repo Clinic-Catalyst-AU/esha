@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skin Assessment - Esha Medi Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Tokens ── */
+    :root {
+      --gold:      #9E8A6E;
+      --gold-lt:   #C4B396;
+      --gold-dk:   #7A6B52;
+      --cream:     #F7F5F2;
+      --soft:      #EFEBE5;
+      --text:      #58595B;
+      --muted:     #8A8580;
+      --demo-bg:   #0A2A28;
+      --demo-acc:  #00D4BC;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow:    0 4px 24px rgba(0,0,0,0.08);
+      --trans:     all 0.22s ease;
+    }
+
+    /* ── Base ── */
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      background-color: var(--soft);
+      color: var(--text);
+      font-family: 'Work Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      /* Linen SVG noise texture */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.2'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    /* ── Demo Banner ── */
+    .demo-banner {
+      background: var(--demo-bg);
+      color: var(--demo-acc);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 8px 16px;
+      width: 100%;
+    }
+
+    /* ── Page layout ── */
+    .page {
+      min-height: calc(100vh - 33px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px 56px;
+    }
+
+    /* ── Quiz card ── */
+    .quiz-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 600px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle gold top border accent */
+    .quiz-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt), var(--gold-dk));
+    }
+
+    @media (max-width: 520px) {
+      .quiz-card {
+        padding: 36px 24px;
+      }
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      height: 48px;
+      width: auto;
+      filter: brightness(0) saturate(0);
+    }
+
+    /* ── Progress dots ── */
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D8D3CC;
+      transition: var(--trans);
+    }
+
+    .dot.active {
+      background: var(--gold);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    .dot.done {
+      background: var(--gold-lt);
+    }
+
+    /* ── Step headings ── */
+    .step-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .step-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 1.75rem;
+      line-height: 1.25;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .step-heading {
+        font-size: 1.4rem;
+      }
+    }
+
+    .step-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* ── Gold button ── */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: var(--trans);
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn-gold:hover, .btn-gold:focus-visible {
+      background: var(--gold-dk);
+      outline: none;
+    }
+
+    .btn-gold:focus-visible {
+      box-shadow: 0 0 0 3px rgba(158,138,110,0.4);
+    }
+
+    /* ── Ghost/back button ── */
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: 'Work Sans', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 6px 0;
+      margin-bottom: 20px;
+      transition: var(--trans);
+    }
+
+    .btn-back:hover {
+      color: var(--gold);
+    }
+
+    .btn-back:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
+
+    .btn-back svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Concern cards (Step 2) ── */
+    .concern-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 0;
+    }
+
+    .concern-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border: 1.5px solid #E2DDD6;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--trans);
+      background: #ffffff;
+      text-align: left;
+    }
+
+    .concern-card:hover {
+      border-color: var(--gold-lt);
+      box-shadow: 0 2px 12px rgba(158,138,110,0.15);
+    }
+
+    .concern-card:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .concern-card.selected {
+      border-color: var(--gold);
+      background: #FDFBF8;
+    }
+
+    .concern-card img {
+      width: 100px;
+      height: 100%;
+      min-height: 90px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .concern-card-body {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .concern-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .concern-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 400px) {
+      .concern-card {
+        grid-template-columns: 80px 1fr;
+      }
+      .concern-card img {
+        width: 80px;
+      }
+    }
+
+    /* ── Pill options (Step 3) ── */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .pill {
+      padding: 9px 18px;
+      border: 1.5px solid var(--gold-lt);
+      border-radius: 100px;
+      background: #ffffff;
+      color: var(--text);
+      font-family: 'Work Sans', sans-serif;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: var(--trans);
+      line-height: 1.2;
+    }
+
+    .pill:hover {
+      border-color: var(--gold);
+      background: #FAF8F5;
+    }
+
+    .pill:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .pill.selected {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #ffffff;
+    }
+
+    .q-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .q-block {
+      margin-bottom: 28px;
+    }
+
+    /* ── Lead form (Step 4) ── */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-dk);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #E2DDD6;
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      color: var(--text);
+      font-family: 'Work Sans', sans-serif;
+      font-size: 0.95rem;
+      transition: var(--trans);
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(158,138,110,0.15);
+    }
+
+    .form-input::placeholder {
+      color: #C0BAB3;
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ── Result step ── */
+    .result-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .result-icon svg {
+      color: #ffffff;
+    }
+
+    .result-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 1.5rem;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .result-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .result-body strong {
+      color: var(--text);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--gold-lt);
+      border-radius: var(--radius-sm);
+      padding: 12px 32px;
+      cursor: pointer;
+      transition: var(--trans);
+      text-decoration: none;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-outline:hover, .btn-outline:focus-visible {
+      border-color: var(--gold);
+      background: #FAF8F5;
+      outline: none;
+    }
+
+    .result-divider {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 10px 0;
+    }
+
+    /* ── Utility ── */
+    .hidden {
+      display: none !important;
+    }
+
+    .mt-sm { margin-top: 8px; }
+    .mt-md { margin-top: 20px; }
+    .text-center { text-align: center; }
+
+    /* ── Accessible focus ring reset ── */
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner" role="banner">
+    CLINIC CATALYST DEMO - ESHA MEDI SPA
+  </div>
+
+  <main class="page">
+    <div class="quiz-card" role="main">
+
+      <!-- ======================================================
+           STEP 1 - WELCOME
+      ====================================================== -->
+      <section id="step-1" aria-label="Welcome">
+
+        <div class="logo-wrap">
+          <img
+            src="https://static.wixstatic.com/media/b6e990_2b5f277f895845fd895aba36e4b220c4~mv2.png/v1/crop/x_209,y_238,w_592,h_331/fill/w_193,h_104,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ESHA%20WHT.png"
+            alt="Esha Medi Spa logo"
+            class="logo"
+            width="193"
+            height="104"
+          />
+        </div>
+
+        <p class="step-label">Skin Assessment</p>
+
+        <h1 class="step-heading">
+          What does your skin<br />need right now?
+        </h1>
+
+        <p class="step-sub">
+          60 seconds. No jargon. Just honest questions about how your skin feels.
+        </p>
+
+        <button class="btn-gold" onclick="goToStep(2)" aria-label="Start my skin assessment">
+          Start My Skin Assessment
+        </button>
+
+      </section>
+
+      <!-- ======================================================
+           STEP 2 - CONCERN SELECTION
+      ====================================================== -->
+      <section id="step-2" class="hidden" aria-label="Choose your skin concern">
+
+        <div class="progress-wrap" aria-hidden="true">
+          <div class="dot done" data-step="1"></div>
+          <div class="dot active" data-step="2"></div>
+          <div class="dot" data-step="3"></div>
+          <div class="dot" data-step="4"></div>
+          <div class="dot" data-step="5"></div>
+        </div>
+
+        <p class="step-label">Step 1 of 4</p>
+
+        <h2 class="step-heading">What brings you here today?</h2>
+        <p class="step-sub">Choose the concern that feels most like you right now.</p>
+
+        <div class="concern-grid" role="radiogroup" aria-label="Skin concerns">
+
+          <!-- Card 1 -->
+          <div
+            class="concern-card"
+            role="radio"
+            aria-checked="false"
+            tabindex="0"
+            data-path="1"
+            onclick="selectConcern(this)"
+            onkeydown="pillKeydown(event, this)"
+          >
+            <img
+              src="https://static.wixstatic.com/media/b6e990_50f584073a2c4bf897b2f1164892052d~mv2.jpg/v1/crop/x_0,y_1547,w_3825,h_2644/fill/w_584,h_404,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Esha266950.jpg"
+              alt="Esha Medi Spa clinic"
+              loading="lazy"
+            />
+            <div class="concern-card-body">
+              <p class="concern-title">Lines and wrinkles are ageing me faster than I'd like</p>
+              <p class="concern-sub">Crow's feet, frown lines, forehead creases</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="concern-card"
+            role="radio"
+            aria-checked="false"
+            tabindex="0"
+            data-path="2"
+            onclick="selectConcern(this)"
+            onkeydown="pillKeydown(event, this)"
+          >
+            <img
+              src="https://static.wixstatic.com/media/b6e990_2dea1cfbea0a47da9fc8df3cb527d5e8~mv2.jpg/v1/crop/x_0,y_472,w_3822,h_4789/fill/w_415,h_520,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Esha267332.jpg"
+              alt="Esha Medi Spa treatment"
+              loading="lazy"
+            />
+            <div class="concern-card-body">
+              <p class="concern-title">My face has lost volume and looks hollow</p>
+              <p class="concern-sub">Flat cheeks, thinning lips, sunken areas</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="concern-card"
+            role="radio"
+            aria-checked="false"
+            tabindex="0"
+            data-path="3"
+            onclick="selectConcern(this)"
+            onkeydown="pillKeydown(event, this)"
+          >
+            <img
+              src="https://static.wixstatic.com/media/b6e990_50f584073a2c4bf897b2f1164892052d~mv2.jpg/v1/crop/x_0,y_1547,w_3825,h_2644/fill/w_584,h_404,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Esha266950.jpg"
+              alt="Esha Medi Spa clinic"
+              loading="lazy"
+            />
+            <div class="concern-card-body">
+              <p class="concern-title">My skin looks dull, tired, or textured</p>
+              <p class="concern-sub">Rough patches, dehydration, loss of glow</p>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ======================================================
+           STEP 3 - FOLLOW-UP QUESTIONS
+      ====================================================== -->
+      <section id="step-3" class="hidden" aria-label="Follow-up questions">
+
+        <div class="progress-wrap" aria-hidden="true">
+          <div class="dot done" data-step="1"></div>
+          <div class="dot done" data-step="2"></div>
+          <div class="dot active" data-step="3"></div>
+          <div class="dot" data-step="4"></div>
+          <div class="dot" data-step="5"></div>
+        </div>
+
+        <button class="btn-back" onclick="goToStep(2)" aria-label="Go back to concern selection">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </button>
+
+        <p class="step-label">Step 2 of 4</p>
+        <h2 class="step-heading" id="q-heading">Tell us a little more</h2>
+        <p class="step-sub" style="margin-bottom: 28px;">Select the answer that feels closest to you.</p>
+
+        <!-- PATH 1: Lines/Wrinkles -->
+        <div id="questions-path-1" class="hidden">
+
+          <div class="q-block">
+            <p class="q-label" id="p1q1-label">Where do you notice lines most?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p1q1-label" data-qid="p1q1">
+              <button class="pill" onclick="selectPill(this)" data-value="Forehead">Forehead</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Around eyes">Around eyes</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Between brows">Between brows</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Mouth area">Mouth area</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Multiple areas">Multiple areas</button>
+            </div>
+          </div>
+
+          <div class="q-block">
+            <p class="q-label" id="p1q2-label">What matters most to you?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p1q2-label" data-qid="p1q2">
+              <button class="pill" onclick="selectPill(this)" data-value="Natural results">Natural results</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Prevention">Prevention</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Softening deep lines">Softening deep lines</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Looking rested">Looking rested</button>
+            </div>
+          </div>
+
+          <div class="q-block">
+            <p class="q-label" id="p1q3-label">Have you had cosmetic treatments before?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p1q3-label" data-qid="p1q3">
+              <button class="pill" onclick="selectPill(this)" data-value="No, first time">No, first time</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Yes, a while ago">Yes, a while ago</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Yes, regularly">Yes, regularly</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PATH 2: Volume Loss -->
+        <div id="questions-path-2" class="hidden">
+
+          <div class="q-block">
+            <p class="q-label" id="p2q1-label">Where do you notice volume loss?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p2q1-label" data-qid="p2q1">
+              <button class="pill" onclick="selectPill(this)" data-value="Cheeks">Cheeks</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Lips">Lips</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Under eyes">Under eyes</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Jawline">Jawline</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Multiple areas">Multiple areas</button>
+            </div>
+          </div>
+
+          <div class="q-block">
+            <p class="q-label" id="p2q2-label">What's your ideal outcome?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p2q2-label" data-qid="p2q2">
+              <button class="pill" onclick="selectPill(this)" data-value="Subtle enhancement">Subtle enhancement</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Restore what I had">Restore what I had</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Look more defined">Look more defined</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Just freshen up">Just freshen up</button>
+            </div>
+          </div>
+
+          <div class="q-block">
+            <p class="q-label" id="p2q3-label">How do you feel about needles?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p2q3-label" data-qid="p2q3">
+              <button class="pill" onclick="selectPill(this)" data-value="Comfortable">Comfortable</button>
+              <button class="pill" onclick="selectPill(this)" data-value="A bit nervous">A bit nervous</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Very nervous but willing">Very nervous but willing</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PATH 3: Skin Quality -->
+        <div id="questions-path-3" class="hidden">
+
+          <div class="q-block">
+            <p class="q-label" id="p3q1-label">What's your main skin frustration?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p3q1-label" data-qid="p3q1">
+              <button class="pill" onclick="selectPill(this)" data-value="Dullness">Dullness</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Rough texture">Rough texture</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Dehydration">Dehydration</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Fine lines">Fine lines</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Uneven tone">Uneven tone</button>
+            </div>
+          </div>
+
+          <div class="q-block">
+            <p class="q-label" id="p3q2-label">How long have you felt this way?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p3q2-label" data-qid="p3q2">
+              <button class="pill" onclick="selectPill(this)" data-value="Recently">Recently</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Several months">Several months</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Over a year">Over a year</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Years">Years</button>
+            </div>
+          </div>
+
+          <div class="q-block">
+            <p class="q-label" id="p3q3-label">What have you tried?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="p3q3-label" data-qid="p3q3">
+              <button class="pill" onclick="selectPill(this)" data-value="Nothing yet">Nothing yet</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Skincare products">Skincare products</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Facials">Facials</button>
+              <button class="pill" onclick="selectPill(this)" data-value="Clinical treatments">Clinical treatments</button>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="btn-gold" id="btn-to-step4" onclick="goToStep(4)" aria-label="Continue to your details">
+          Continue
+        </button>
+
+      </section>
+
+      <!-- ======================================================
+           STEP 4 - LEAD CAPTURE
+      ====================================================== -->
+      <section id="step-4" class="hidden" aria-label="Your details">
+
+        <div class="progress-wrap" aria-hidden="true">
+          <div class="dot done" data-step="1"></div>
+          <div class="dot done" data-step="2"></div>
+          <div class="dot done" data-step="3"></div>
+          <div class="dot active" data-step="4"></div>
+          <div class="dot" data-step="5"></div>
+        </div>
+
+        <button class="btn-back" onclick="goToStep(3)" aria-label="Go back to questions">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </button>
+
+        <p class="step-label">Step 3 of 4</p>
+
+        <h2 class="step-heading">Your personalised recommendation is ready</h2>
+        <p class="step-sub" style="margin-bottom: 28px;">
+          Share your details and Amanda will be in touch within 24 hours.
+        </p>
+
+        <form id="lead-form" novalidate onsubmit="submitForm(event)">
+
+          <div class="form-group">
+            <label class="form-label" for="input-name">Your name</label>
+            <input
+              id="input-name"
+              name="name"
+              type="text"
+              class="form-input"
+              placeholder="First name"
+              autocomplete="given-name"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-email">Email address</label>
+            <input
+              id="input-email"
+              name="email"
+              type="email"
+              class="form-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-phone">
+              Phone
+              <span style="font-size:0.72rem; color: var(--muted); font-style: italic; text-transform: none; letter-spacing: 0; margin-left: 4px;">(optional)</span>
+            </label>
+            <input
+              id="input-phone"
+              name="phone"
+              type="tel"
+              class="form-input"
+              placeholder="04xx xxx xxx"
+              autocomplete="tel"
+            />
+          </div>
+
+          <div id="form-error" class="hidden" role="alert" style="color:#b85c5c; font-size:0.82rem; margin-bottom: 12px; text-align: center;"></div>
+
+          <button type="submit" class="btn-gold" aria-label="Get my personalised skin plan">
+            Get My Skin Plan
+          </button>
+
+          <p class="form-note">No spam. Just your personalised recommendation.</p>
+
+        </form>
+
+      </section>
+
+      <!-- ======================================================
+           STEP 5 - RESULT
+      ====================================================== -->
+      <section id="step-5" class="hidden" aria-label="Your skin plan result">
+
+        <div class="progress-wrap" aria-hidden="true">
+          <div class="dot done" data-step="1"></div>
+          <div class="dot done" data-step="2"></div>
+          <div class="dot done" data-step="3"></div>
+          <div class="dot done" data-step="4"></div>
+          <div class="dot active" data-step="5"></div>
+        </div>
+
+        <div class="result-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 13L10.5 18.5L21 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <h2 class="result-name" id="result-heading">Thank you!</h2>
+
+        <p class="result-body" id="result-copy"></p>
+
+        <a
+          href="https://bookings.gettimely.com/eshamedispa/book"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-gold"
+          aria-label="Book a consultation at Esha Medi Spa"
+        >
+          Book a Consultation
+        </a>
+
+        <p class="result-divider">or</p>
+
+        <a
+          href="tel:0447774334"
+          class="btn-outline"
+          aria-label="Call Esha Medi Spa on 0447 774 334"
+        >
+          Call: 0447 774 334
+        </a>
+
+      </section>
+
+    </div><!-- /.quiz-card -->
+  </main>
+
+  <script>
+    /* ============================================================
+       STATE
+    ============================================================ */
+    const state = {
+      path: null,       // 1 | 2 | 3
+      answers: {},
+      name: '',
+      email: '',
+      phone: ''
+    };
+
+    /* ============================================================
+       STEP NAVIGATION
+    ============================================================ */
+    function goToStep(n) {
+      // Validation before leaving step 3
+      if (n === 4 && currentStep() === 3) {
+        if (!validateStep3()) return;
+      }
+
+      document.querySelectorAll('section[id^="step-"]').forEach(function(s) {
+        s.classList.add('hidden');
+      });
+
+      var target = document.getElementById('step-' + n);
+      target.classList.remove('hidden');
+
+      // Focus management - move focus to the heading or first interactive element
+      var focusTarget = target.querySelector('h1, h2, button, input');
+      if (focusTarget) {
+        focusTarget.focus({ preventScroll: false });
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function currentStep() {
+      for (var i = 1; i <= 5; i++) {
+        var el = document.getElementById('step-' + i);
+        if (el && !el.classList.contains('hidden')) return i;
+      }
+      return 1;
+    }
+
+    /* ============================================================
+       CONCERN CARD SELECTION (Step 2)
+    ============================================================ */
+    function selectConcern(card) {
+      // Deselect all
+      document.querySelectorAll('.concern-card').forEach(function(c) {
+        c.classList.remove('selected');
+        c.setAttribute('aria-checked', 'false');
+      });
+
+      // Select clicked
+      card.classList.add('selected');
+      card.setAttribute('aria-checked', 'true');
+      state.path = parseInt(card.dataset.path, 10);
+
+      // Small delay so user sees the selection, then advance
+      setTimeout(function() {
+        showPathQuestions(state.path);
+        goToStep(3);
+      }, 280);
+    }
+
+    function pillKeydown(e, el) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      }
+    }
+
+    /* ============================================================
+       PATH QUESTIONS DISPLAY (Step 3)
+    ============================================================ */
+    function showPathQuestions(path) {
+      [1, 2, 3].forEach(function(p) {
+        var el = document.getElementById('questions-path-' + p);
+        if (el) el.classList.add('hidden');
+      });
+
+      // Reset any previous pill selections for this path
+      var target = document.getElementById('questions-path-' + path);
+      if (target) {
+        target.classList.remove('hidden');
+        target.querySelectorAll('.pill').forEach(function(pill) {
+          pill.classList.remove('selected');
+          pill.setAttribute('aria-pressed', 'false');
+        });
+      }
+
+      // Clear answers for this session
+      state.answers = {};
+    }
+
+    /* ============================================================
+       PILL SELECTION (Step 3)
+    ============================================================ */
+    function selectPill(pill) {
+      var group = pill.closest('.pill-group');
+      var qid = group.dataset.qid;
+
+      // Deselect siblings
+      group.querySelectorAll('.pill').forEach(function(p) {
+        p.classList.remove('selected');
+        p.setAttribute('aria-pressed', 'false');
+      });
+
+      // Select this pill
+      pill.classList.add('selected');
+      pill.setAttribute('aria-pressed', 'true');
+      state.answers[qid] = pill.dataset.value;
+    }
+
+    /* ============================================================
+       STEP 3 VALIDATION
+    ============================================================ */
+    function validateStep3() {
+      var pathEl = document.getElementById('questions-path-' + state.path);
+      if (!pathEl) return false;
+
+      var groups = pathEl.querySelectorAll('.pill-group');
+      for (var i = 0; i < groups.length; i++) {
+        var qid = groups[i].dataset.qid;
+        if (!state.answers[qid]) {
+          // Highlight unanswered group
+          groups[i].querySelectorAll('.pill').forEach(function(p) {
+            p.style.borderColor = '#b85c5c';
+          });
+          groups[i].querySelector('.pill').focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    /* ============================================================
+       FORM SUBMIT (Step 4)
+    ============================================================ */
+    function submitForm(e) {
+      e.preventDefault();
+
+      var errorEl = document.getElementById('form-error');
+      errorEl.classList.add('hidden');
+      errorEl.textContent = '';
+
+      var name  = document.getElementById('input-name').value.trim();
+      var email = document.getElementById('input-email').value.trim();
+      var phone = document.getElementById('input-phone').value.trim();
+
+      if (!name) {
+        showFormError('Please enter your name.');
+        document.getElementById('input-name').focus();
+        return;
+      }
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFormError('Please enter a valid email address.');
+        document.getElementById('input-email').focus();
+        return;
+      }
+
+      state.name  = name;
+      state.email = email;
+      state.phone = phone;
+
+      buildResult();
+      goToStep(5);
+    }
+
+    function showFormError(msg) {
+      var el = document.getElementById('form-error');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+
+    /* ============================================================
+       RESULT COPY (Step 5)
+    ============================================================ */
+    var resultCopy = {
+      1: "Based on your answers, it sounds like softening lines and looking naturally refreshed is your goal. Amanda will review your responses and reach out to chat through what's possible - whether that's a first conversation or building on treatments you've had before. A consultation is a relaxed, no-pressure chat about what's right for <em>you</em>.",
+      2: "Restoring volume is one of the most natural-looking changes possible, when it's done well. Amanda will look over what you've shared and reach out to discuss what gentle, tailored treatment could look like for your face. She takes her time - no rushing, no pushing. Just an honest conversation in a relaxed Kyneton clinic.",
+      3: "Skin quality changes are so common, and so treatable. Based on what you've shared, Amanda will be in touch to walk you through options that suit your skin and your life - from a targeted treatment plan to simple first steps. You don't have to have it all figured out before you come in."
+    };
+
+    function buildResult() {
+      var firstName = state.name.split(' ')[0];
+      document.getElementById('result-heading').textContent = 'Thank you, ' + firstName + '!';
+      document.getElementById('result-copy').innerHTML = resultCopy[state.path] || resultCopy[1];
+    }
+
+    /* ============================================================
+       KEYBOARD ACCESSIBILITY - concern cards act like radio buttons
+    ============================================================ */
+    document.querySelectorAll('.concern-card').forEach(function(card) {
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectConcern(card);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

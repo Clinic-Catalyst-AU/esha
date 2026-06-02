@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Private B&A Gallery - Esha Medi Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Forum&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #0A2A28;
+  --teal: #00D4BC;
+  --teal-mid: #00B4A0;
+  --gold: #BC9050;
+  --warm: #FDF8F2;
+  --text: #2D2D2D;
+  --muted: #5A6B6A;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:var(--warm); color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.6; }
+h1,h2,h3 { font-family:'Forum','Cormorant Garamond',serif; font-weight:400; letter-spacing:0.02em; }
+.gate {
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:48px 24px;
+  background:linear-gradient(180deg, var(--dark) 0%, #062420 100%);
+}
+.gate-card {
+  max-width:480px; width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(0,212,188,0.22);
+  border-radius:14px;
+  padding:48px 40px;
+  text-align:center;
+  color:#fff;
+}
+.gate-eyebrow {
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:18px;
+}
+.gate h1 { font-size:34px; color:#fff; margin-bottom:14px; line-height:1.15; }
+.gate-rule { width:48px; height:1px; background:var(--gold); margin:18px auto 22px; }
+.gate p { font-size:14px; color:rgba(255,255,255,0.7); margin-bottom:8px; }
+.gate p.note { font-size:12px; color:rgba(255,255,255,0.45); margin-top:14px; line-height:1.6; }
+.gate-form { margin-top:28px; display:flex; flex-direction:column; gap:12px; }
+.gate-form input {
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(0,212,188,0.3);
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  letter-spacing:0.08em;
+  text-align:center;
+  padding:14px 18px;
+  border-radius:6px;
+  outline:none;
+}
+.gate-form input:focus { border-color:var(--teal); }
+.gate-form button {
+  background:var(--teal);
+  color:var(--dark);
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  padding:14px 22px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:background 0.2s;
+}
+.gate-form button:hover { background:var(--teal-mid); color:#fff; }
+.gate-error { color:#FF8B7C; font-size:13px; min-height:18px; margin-top:6px; }
+.content { display:none; }
+.content.unlocked { display:block; }
+.hero {
+  min-height:60vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:80px 24px;
+  text-align:center;
+  background:linear-gradient(180deg, var(--dark) 0%, #0d3530 100%);
+  color:#fff;
+}
+.hero-inner { max-width:680px; }
+.hero-eyebrow {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:18px;
+}
+.hero h1 { font-size:clamp(36px,5vw,56px); color:#fff; margin-bottom:14px; }
+.hero p { font-size:15px; color:rgba(255,255,255,0.75); max-width:520px; margin:0 auto; }
+.compliance-banner {
+  background:rgba(188,144,80,0.1);
+  border-top:1px solid rgba(188,144,80,0.3);
+  border-bottom:1px solid rgba(188,144,80,0.3);
+  padding:18px 24px;
+  text-align:center;
+  font-size:13px;
+  color:var(--gold);
+  font-style:italic;
+}
+.gallery {
+  max-width:980px;
+  margin:0 auto;
+  padding:80px 32px;
+}
+.gallery-eyebrow {
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--teal-mid);
+  margin-bottom:14px;
+}
+.gallery h2 { font-size:36px; margin-bottom:16px; color:var(--dark); }
+.gallery .intro { font-size:15px; color:var(--muted); max-width:600px; margin-bottom:48px; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:32px;
+}
+.case {
+  background:#fff;
+  border:1px solid #E0EAEA;
+  border-radius:10px;
+  overflow:hidden;
+}
+.case-imgs {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:#0a2a28;
+}
+.case-imgs .ph {
+  aspect-ratio:4/5;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg, #1a3d3a 0%, #0a2a28 100%);
+  color:rgba(255,255,255,0.35);
+  font-family:'Forum',serif;
+  font-size:32px;
+}
+.case-imgs .ph.after { background:linear-gradient(135deg, #BC9050 0%, #8a6a3a 100%); color:rgba(255,255,255,0.55); }
+.case-body { padding:22px 24px; }
+.case-tag {
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--teal-mid);
+  margin-bottom:8px;
+}
+.case-body h3 { font-size:20px; color:var(--dark); margin-bottom:8px; }
+.case-body p { font-size:13px; color:var(--muted); line-height:1.6; }
+.placeholder-note {
+  margin-top:48px;
+  padding:24px 28px;
+  background:#fff;
+  border:1px dashed rgba(0,180,160,0.4);
+  border-radius:10px;
+  font-size:13px;
+  color:var(--muted);
+  font-style:italic;
+}
+.placeholder-note strong { color:var(--dark); font-style:normal; }
+.footer {
+  padding:48px 24px;
+  text-align:center;
+  background:var(--dark);
+  color:rgba(255,255,255,0.45);
+  font-size:12px;
+  letter-spacing:0.06em;
+}
+@media (max-width:640px) {
+  .grid { grid-template-columns:1fr; }
+  .gallery { padding:56px 22px; }
+}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <p class="gate-eyebrow">Private Access</p>
+    <h1>Injectable B&amp;A Gallery</h1>
+    <div class="gate-rule"></div>
+    <p>This gallery contains injectable treatment before-and-after imagery.</p>
+    <p>Access is provided after consultation to comply with AHPRA cosmetic injectables advertising guidelines.</p>
+    <form class="gate-form" onsubmit="return tryUnlock(event)">
+      <input type="text" id="code" placeholder="ACCESS CODE" autocomplete="off">
+      <button type="submit">Unlock Gallery</button>
+      <p class="gate-error" id="err"></p>
+    </form>
+    <p class="note">If you have completed a consultation with Amanda, your access code was provided after your appointment. Otherwise, please book a complimentary consultation.</p>
+  </div>
+</div>
+
+<div class="content" id="content">
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Esha Medi Spa &middot; Private Gallery</p>
+      <h1>Real results from real clients</h1>
+      <p>Twenty-five years of clinical nursing, paired with the Observ 520 imaging system for precise, side-by-side documentation.</p>
+    </div>
+  </section>
+
+  <div class="compliance-banner">
+    Access-controlled in line with AHPRA cosmetic injectable advertising guidelines. Individual outcomes vary.
+  </div>
+
+  <section class="gallery">
+    <p class="gallery-eyebrow">Recent Cases</p>
+    <h2>Before &amp; After Studies</h2>
+    <p class="intro">A small selection of pigmentation, anti-wrinkle and skin renewal cases - photographed in consistent lighting using the Observ 520 imaging system. Live cases to be uploaded after Amanda confirms client consent.</p>
+
+    <div class="grid">
+      <div class="case">
+        <div class="case-imgs"><div class="ph">Before</div><div class="ph after">After</div></div>
+        <div class="case-body">
+          <p class="case-tag">Pigmentation Pathway</p>
+          <h3>Sun-damage clearance</h3>
+          <p>4 sessions, 6 weeks apart. Observ 520 paired imaging confirming melanin reduction.</p>
+        </div>
+      </div>
+      <div class="case">
+        <div class="case-imgs"><div class="ph">Before</div><div class="ph after">After</div></div>
+        <div class="case-body">
+          <p class="case-tag">Anti-Wrinkle</p>
+          <h3>Forehead softening</h3>
+          <p>Single treatment, photographed at 2-week review. Natural, refreshed - never frozen.</p>
+        </div>
+      </div>
+      <div class="case">
+        <div class="case-imgs"><div class="ph">Before</div><div class="ph after">After</div></div>
+        <div class="case-body">
+          <p class="case-tag">Skin Renewal</p>
+          <h3>Rejuran + Mesoneedling</h3>
+          <p>3-session course. Texture, hydration and tone progression captured at every visit.</p>
+        </div>
+      </div>
+      <div class="case">
+        <div class="case-imgs"><div class="ph">Before</div><div class="ph after">After</div></div>
+        <div class="case-body">
+          <p class="case-tag">Volume Restoration</p>
+          <h3>Subtle midface support</h3>
+          <p>Conservative dermal filler approach. Documented at 4-week review.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder-note">
+      <strong>Demo gallery.</strong> Real client B&amp;A images will replace these placeholders once Amanda confirms which cases have explicit social-use consent on file. The Observ 520 paired imaging workflow makes consistent before-and-after documentation effortless.
+    </div>
+  </section>
+
+  <div class="footer">Esha Medi Spa &middot; 16 Epping Street, Kyneton VIC &middot; Private Gallery</div>
+</div>
+
+<script>
+const CODE = 'esha2026';
+const KEY = 'esha-gallery-unlocked';
+function unlock() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('content').classList.add('unlocked');
+}
+function tryUnlock(e) {
+  e.preventDefault();
+  const v = document.getElementById('code').value.trim().toLowerCase();
+  if (v === CODE) {
+    sessionStorage.setItem(KEY, '1');
+    unlock();
+  } else {
+    document.getElementById('err').textContent = 'Incorrect access code. Please contact the clinic.';
+  }
+  return false;
+}
+if (sessionStorage.getItem(KEY) === '1') unlock();
+</script>
+</body>
+</html>
